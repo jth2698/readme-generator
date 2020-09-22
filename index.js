@@ -71,15 +71,25 @@ function promptUser() {
     ])
 }
 
-function generateREADME(answers) {
+function generateREADME(answers, licenseBadge) {
+
+    if (answers.license == "mit") {
+        let licenseBadge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+    }
+    if (answers.license == "gnu") {
+        licenseBadge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
+    }
+    if (answers.license == "apache") {
+        licenseBadge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
+    }
 
     return `
-    #${answers.title}
+    #${answers.title} ${licenseBadge}
 
     ## Description
     ${answers.description}
 
-    ##Table of Contents
+    ## Table of Contents
     * [Installation](#installation)
     * [Usage](#usage)
     * [Contribution Guidelines](#contribution)
