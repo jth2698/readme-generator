@@ -71,10 +71,12 @@ function promptUser() {
     ])
 }
 
-function generateREADME(answers, licenseBadge) {
+function generateREADME(answers) {
+
+    let licenseBadge;
 
     if (answers.license == "mit") {
-        let licenseBadge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
+        licenseBadge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
     }
     if (answers.license == "gnu") {
         licenseBadge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
@@ -84,37 +86,37 @@ function generateREADME(answers, licenseBadge) {
     }
 
     return `
-    #${answers.title} ${licenseBadge}
+# ${answers.title} ${licenseBadge}
 
-    ## Description
-    ${answers.description}
+## Description
+${answers.description}
 
-    ## Table of Contents
-    * [Installation](#installation)
-    * [Usage](#usage)
-    * [Contribution Guidelines](#contribution)
-    * [Testing](#testing) 
-    * [License](#license)
-    * [Questions] (#questions)
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contribution Guidelines](#contribution)
+* [Testing](#testing) 
+* [License](#license)
+* [Questions](#questions)
     
-    ## Installation
-    ${answers.installation}
+## Installation
+${answers.installation}
 
-    ## Usage
-    ${answers.usage}
+## Usage
+${answers.usage}
 
-    ## Contribution Guidelines
-    ${answers.contribution}
+## Contribution Guidelines
+${answers.contribution}
 
-    ## Testing
-    ${answers.testing}
+## Testing
+${answers.testing}
 
-    ## License
-    ${answers.license}
+## License
+${answers.license}
 
-    ## Questions
-    ${answers.github}
-    ${answers.email}
+## Questions
+${answers.github}
+${answers.email}
    `;
 
 }
@@ -128,7 +130,7 @@ function init() {
 
             const README = generateREADME(answers);
 
-            return writeToFile("README.md", README);
+            return writeToFile("./readme-output/README.md", README, "utf-8");
         })
 
         .then(function () {
