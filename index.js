@@ -53,20 +53,20 @@ function promptUser() {
             message: questions[5]
         },
         {
-            type: "input",
+            type: "list",
             choices: ["mit", "gnu", "apache"],
             name: "license",
-            message: questions[5]
-        },
-        {
-            type: "input",
-            name: "github",
             message: questions[6]
         },
         {
             type: "input",
-            name: "email",
+            name: "github",
             message: questions[7]
+        },
+        {
+            type: "input",
+            name: "email",
+            message: questions[8]
         },
     ])
 }
@@ -105,7 +105,6 @@ function generateREADME(answers) {
     ## Questions
     ${answers.github}
     ${answers.email}
-    <html lang="en">
    `;
 
 }
