@@ -2,6 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
+const generateMarkdown = require("./utils/generateMarkdown.js")
 
 // promisified version of fs.writefile to ensure file write occurs after inquirer answers returned
 const writeToFile = util.promisify(fs.writeFile);
@@ -74,67 +75,14 @@ function promptUser() {
     ])
 }
 
-// generateREADME function taking inquirer answers and inserting into a markdown-formatted teplate literal
-function generateREADME(answers) {
-
-    // minor logic to apply applicable licnese badge at top of file
-    let licenseBadge;
-
-    if (answers.license == "mit") {
-        licenseBadge = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)"
-    }
-    if (answers.license == "gnu") {
-        licenseBadge = "[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)"
-    }
-    if (answers.license == "apache") {
-        licenseBadge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
-    }
-
-    // template literal
-    return `
-# ${answers.title} ${licenseBadge}
-
-## Description
-${answers.description}
-
-## Table of Contents
-* [Installation](#installation)
-* [Usage](#usage)
-* [Contribution Guidelines](#contribution)
-* [Testing](#testing) 
-* [License](#license)
-* [Questions](#questions)
-    
-## Installation
-${answers.installation}
-
-## Usage
-${answers.usage}
-
-## Contribution Guidelines
-${answers.contribution}
-
-## Testing
-${answers.testing}
-
-## License
-${answers.license}
-
-## Questions
-${answers.github}
-${answers.email}
-   `;
-
-}
-
 // function to initialize program
 function init() {
 
     promptUser()
 
-        .then(function (answers) {
+        .then(function (data) {
 
-            const README = generateREADME(answers);
+            const README = generateMarkdown(data);
 
             // writing README to separate directory to avoid confusion and conflict with generator README
             return writeToFile("./readme-output/README.md", README, "utf-8");
