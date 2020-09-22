@@ -1,7 +1,9 @@
+// add dependencies
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
 
+// promisified version of fs.writefile to ensure file write occurs after inquirer answers returned
 const writeToFile = util.promisify(fs.writeFile);
 
 // array of questions for user
@@ -18,6 +20,7 @@ const questions = [
     "Enter your email address",
 ];
 
+// promptUser function to obtain answers needed to geneerate README
 function promptUser() {
 
     return inquirer.prompt([
@@ -71,8 +74,10 @@ function promptUser() {
     ])
 }
 
+// generateREADME function taking inquirer answers and inserting into a markdown-formatted teplate literal
 function generateREADME(answers) {
 
+    // minor logic to apply applicable licnese badge at top of file
     let licenseBadge;
 
     if (answers.license == "mit") {
@@ -85,6 +90,7 @@ function generateREADME(answers) {
         licenseBadge = "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)"
     }
 
+    // template literal
     return `
 # ${answers.title} ${licenseBadge}
 
@@ -130,12 +136,13 @@ function init() {
 
             const README = generateREADME(answers);
 
+            // writing README to separate directory to avoid confusion and conflict with generator README
             return writeToFile("./readme-output/README.md", README, "utf-8");
         })
 
         .then(function () {
 
-            console.log("Successfully wrote to README.md");
+            console.log("Successfully wrote to ./readme-output/README.md");
         })
 
         .catch(function (err) {
