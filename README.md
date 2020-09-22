@@ -26,5 +26,5 @@ We recommend testing using the usage method above.
 gnu
 
 ## Questions
-* On Github:    <https://github.com/jth2698>
-* Or email us:   <jth2698@gmail.com>
+* <https://github.com/jth2698>
+* <jth2698@gmail.com>

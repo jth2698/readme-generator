@@ -41,8 +41,8 @@ ${data.testing}
 ${data.license}
 
 ## Questions
-* On GitHub:   <https://github.com/${data.github}>
-* Or email us: <${data.email}>`;
+* <https://github.com/${data.github}>
+* <${data.email}>`;
 }
 
 module.exports = generateMarkdown;
