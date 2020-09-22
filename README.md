@@ -27,4 +27,4 @@ gnu
 
 ## Questions
 * On Github:    [jth2698](github.com/jth2698)
-* Or emailus:   [jth2698@gmail.com](jth2698@gmail.com)
+* Or email us:   [jth2698@gmail.com](jth2698@gmail.com)
